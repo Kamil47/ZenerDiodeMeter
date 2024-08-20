@@ -39,7 +39,15 @@ void readCurrent() {                                                      //func
         value = maxvalue;      
   }
 }
-
+void flash(int a){                                                          //function blink for service mode
+  for (int i=0; i<a; i++){
+        digitalWrite(errPin, HIGH);
+        delay(100);
+        digitalWrite(errPin, LOW);
+        delay(100);
+      } 
+  delay(800); 
+}
 void service(){                                                            //service mode
       digitalWrite(v12Pin, HIGH);
       Serial.println("Service Mode 12V");
@@ -78,15 +86,7 @@ void service(){                                                            //ser
             on = false;
 }
                  
-void flash(int a){                                                          //function blink for service mode
-  for (int i=0; i<a; i++){
-        digitalWrite(errPin, HIGH);
-        delay(100);
-        digitalWrite(errPin, LOW);
-        delay(100);
-      } 
-  delay(800); 
-}
+
 
 void connectDvm(){                                                          //function for connecting voltmeter for 10s.
                 digitalWrite(dvmPin, HIGH);                                
@@ -181,5 +181,5 @@ void loop() {
              }         
                  
 }  
-}
+
 
