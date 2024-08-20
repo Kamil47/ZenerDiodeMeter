@@ -1,14 +1,15 @@
 /*Zener Diode Tester, ver.8, tested
 Arduino Nano, LM317
 Software by Kamil Zachej, SK
+remake 2024
 */
 
 #include <Arduino.h>
 
 int value;
 int currentvalue;
-int maxvalue;                                                            //value selected from 10 conseqent meassurement reading
-int start = LOW;                                                         //digital reading of button START
+int maxvalue;                                              //value selected from 10 conseqent meassurement reading
+int start = LOW;                                           //digital reading of button START
 const int pushButton = 3;
 byte current = A1;
 bool on = true;
@@ -16,7 +17,7 @@ bool error = false;
 bool buttonState = false;
 unsigned long startMillis;
 unsigned long currentMillis;
-const unsigned long period = 2000;                                       //time limit to enter service mode after switched on
+const unsigned long period = 2000;                          //time limit to enter service mode after switched on
 const int v12Pin=4;                           
 const int v24Pin=5;                           
 const int v36Pin=6;                           
@@ -24,7 +25,7 @@ const int v48Pin=7;
 const int dvmPin=8;                          
 const int errPin=9;
 
-void readCurrent() {                                                      //function read current 10x, define max value
+void readCurrent() {                                         //function read current 10x, define max value
   maxvalue = 0;
   for (int i = 0; i<10; i++){
     currentvalue = analogRead(current);
@@ -39,7 +40,8 @@ void readCurrent() {                                                      //func
         value = maxvalue;      
   }
 }
-void flash(int a){                                                          //function blink for service mode
+
+void flash(int a){                                              //function blink for service mode
   for (int i=0; i<a; i++){
         digitalWrite(errPin, HIGH);
         delay(100);
@@ -48,11 +50,12 @@ void flash(int a){                                                          //fu
       } 
   delay(800); 
 }
-void service(){                                                            //service mode
+
+void service(){                                                 //service mode
       digitalWrite(v12Pin, HIGH);
       Serial.println("Service Mode 12V");
          do{
-            flash(1);                                                      //blinking LED function 1 time for the first step of srvice
+            flash(1);                                           //blinking LED function 1 time for the first step of srvice
             start = digitalRead(pushButton);
           }while (start != HIGH);        
             digitalWrite(v12Pin, LOW);
@@ -84,11 +87,9 @@ void service(){                                                            //ser
             digitalWrite(v48Pin, LOW);
             Serial.println("End of Service Mode");
             on = false;
-}
-                 
+}            
 
-
-void connectDvm(){                                                          //function for connecting voltmeter for 10s.
+void connectDvm(){                                               //function for connecting voltmeter for 10s.
                 digitalWrite(dvmPin, HIGH);                                
                 delay(10000);
                 digitalWrite(dvmPin, LOW);
@@ -102,13 +103,13 @@ pinMode(v48Pin, OUTPUT);
 pinMode(dvmPin, OUTPUT);
 pinMode(pushButton,INPUT);
 pinMode(errPin, OUTPUT);
-startMillis = millis();                                                   //start time
+startMillis = millis();                                            //start time check
 digitalWrite(errPin, LOW);
 Serial.println("Tester ready - push button START");  
 }
 
 void loop() {
-  if (on == true){                                                        //if service mode activated - enter to service mode 
+  if (on == true){                                                 //if service mode activated - enter to service mode 
        do  { 
            currentMillis = millis();
            start = digitalRead(pushButton);
@@ -126,19 +127,19 @@ void loop() {
      start = digitalRead(pushButton);
      }while (start != HIGH);
         digitalWrite(errPin, LOW);          
-        digitalWrite(v12Pin, HIGH);                                       //meassurement voltage 12V and current 20mA
+        digitalWrite(v12Pin, HIGH);                                //meassurement voltage 12V and current 20mA
         delay(200);
         Serial.println("Nastavene 12V");       
             readCurrent();
-            if (value > 60) {                                             //test if current through Zener diode is present
+            if (value > 60) {                                      //test if current through Zener diode is present
                 connectDvm();                                            
                 Serial.println("DVM zapojeny na 12V");
                 digitalWrite(v12Pin, LOW);
                 }
-            else {                                                        //if current is not present
-                digitalWrite(v12Pin, LOW);                                //disconnect 12V
-                delay(500);                                               //delay between two relays activity
-                digitalWrite(v24Pin, HIGH);                               //connect 24V and current 10mA      
+            else {                                                  //if current is not present
+                digitalWrite(v12Pin, LOW);                          //disconnect 12V
+                delay(500);                                         //delay between two relays activity
+                digitalWrite(v24Pin, HIGH);                         //connect 24V and current 10mA      
                 Serial.println("Nastavene 24V");
                               
                 readCurrent();                              
@@ -170,7 +171,7 @@ void loop() {
                             Serial.println("DVM zapojeny na 48V");
                             digitalWrite(v48Pin, LOW);
                         }
-                        else {                                             //error, if current was not detected under all voltages
+                        else {                                       //error, if current was not detected under all voltages
                             digitalWrite(v48Pin, LOW);                                 
                             digitalWrite(errPin, HIGH);                
                             error = true;
