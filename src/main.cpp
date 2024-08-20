@@ -2,6 +2,7 @@
 Arduino Nano, LM317
 Software by Kamil Zachej, SK
 remake 2024
+function Serial() used just for debugg
 */
 
 #include <Arduino.h>
