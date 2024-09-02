@@ -1,9 +1,16 @@
-Suggested project  allow to measure diodes from 1.8V to 48V in one simple measurement. Connect diode,  just click on the START button and read the value.  The power of the measured diodes can be from 250mW to several Watts. Measurement method
+# Arduino Zener Diode Tester #
 
-The V - I characteristic for a zener diode is shown in Figure 1. In the biased direction, a Zener diode behaves like a normal diode. In the opposite direction, at a certain voltage - Breakdown Voltage, the diode starts to conduct current. The typical voltage of a Zener diode is usually defined for a certain current - the red point in the figure. The reverse voltage is almost constant over a certain current range. As a rule, this area is also the working area of ​​the diode.
+## Introduction ##
+
+Suggested project  allow to measure Zener diodes from 1.8V to 48V in one simple measurement. Connect diode,  just click on the START button and read the value.  The power of the measured diodes can be from 250mW to several Watts. 
+
+## Measurement method ##
+
+The V - I characteristic for a zener diode is shown in Figure in Doc folder. In the biased direction, a Zener diode behaves like a normal diode. In the opposite direction, at a certain voltage - Breakdown Voltage, the diode starts to conduct current. The typical voltage of a Zener diode is usually defined for a certain current - the red point in the figure. The reverse voltage is almost constant over a certain current range. As a rule, this area is also the working area of ​​the diode.
 
 The tester measures this voltage at a current below the Zener knee, inside the working area. Since the selected measurement range is up to 48V, the device must be able to supply this voltage and at the same time, measure the voltage value on the diode. This happens with a constant current flow through the tested diode.﻿
-Constant current
+
+## Constant current ##
 
 A constant current source with an LM317 voltage regulator is used as the main measuring circuit. The circuit in the following figure ensures that the current at OUT and through the diode will be constant.  The current is stable, regardless of the voltage drop on the tested diode and the voltage value at the IN input. For this reason, we can measure the voltage directly on Zener diode.
 General description
@@ -12,7 +19,7 @@ The measurement is controlled by the Arduino Nano. Microprocessor gradually conn
 
 The value of the constant current in each step is different and decreases with increasing step number of the voltage range. This will not overshoot the power dissipation of the diode.
 
-﻿﻿Description of the circuit
+## ﻿﻿Description of the circuit  ##
 
 Circuit description refer to attached connection diagram:
 
@@ -31,7 +38,7 @@ Arduino digital outputs D4 to D7 control relays for each step, D8 control Digita
 After I have finished project, I decided to add one more led - POWER, because if voltmeter is dark (off), there is not very clear if instrument itself is on or off. Led Power is connected in series with resistor 470 between points outside of PCB, from Start X3-1 to Zener X2-1. Resistor is mounted on small board with push button.
 
 
-Construction
+## Construction ##
  
 As a box for the project, I have used enclosure OKW, found in old electronic parts store. This box is still available at OKW as a shell type enclosure. The box is not very suitable because is too small for the board, but some upgrade of box itself and PCB allow to put all parts inside. PCB was designed in Eagle as maximum size for free version 8x10cm. In the first moment it looks like impossible to put all components on board, but finally I was successful.
 
@@ -46,7 +53,7 @@ On front panel there is label print on adhesive photo paper. Label is done in Pa
 
 PCB is designed by Eagle free software. I recommend to order the board at PCB service company and for this reason is attached Gerber zip. file.
 
-Programming and setting
+## Programming and setting ##
  
 Arduino software - ino file is attached. I try to document all main parts of code and hope it is better understandable than my English. What need to be explain from the code is function "service". It is service mode and could be used for setting instrument if you switch it for the first time.
 
