@@ -1,8 +1,8 @@
-# Arduino Zener Diode Tester #
+# Arduino Zener Diode Meter #
 
 ## Introduction ##
 
-Suggested project  allow to measure Zener diodes from 1.8V to 48V in one simple measurement. Connect diode,  just click on the START button and read the value.  The power of the measured diodes can be from 250mW to several Watts.
+Suggested project  allow to measure voltage of Zener diodes from 1.8V to 48V in one simple measurement. Connect diode,  just click on the START button and read the value.  The power of the measured diodes can be from 250mW to several Watts.
 
 ## Measurement method ##
 
