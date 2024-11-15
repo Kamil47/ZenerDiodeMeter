@@ -130,7 +130,7 @@ void loop() {
         digitalWrite(errPin, LOW);          
         digitalWrite(v12Pin, HIGH);                                //meassurement voltage 12V and current 20mA
         delay(200);
-        Serial.println("Nastavene 12V");       
+        Serial.println("Set for 12V");       
             readCurrent();
             if (value > 60) {                                      //test if current through Zener diode is present
                 connectDvm();                                            
@@ -141,35 +141,35 @@ void loop() {
                 digitalWrite(v12Pin, LOW);                          //disconnect 12V
                 delay(500);                                         //delay between two relays activity
                 digitalWrite(v24Pin, HIGH);                         //connect 24V and current 10mA      
-                Serial.println("Nastavene 24V");
+                Serial.println("Set for 24V");
                               
                 readCurrent();                              
                 if (value > 25) {
                     connectDvm();
-                    Serial.println("DVM zapojeny na 24V");
+                    Serial.println("DVM set for 24V");
                     digitalWrite(v24Pin, LOW);
                    }
                 else {                                        
                     digitalWrite(v24Pin, LOW);
                     delay(500);                      
                     digitalWrite(v36Pin, HIGH);                    
-                    Serial.println("Nastavene 36V"); 
+                    Serial.println("Set for 36V"); 
                        
                     readCurrent();                
                     if (value > 15) {                   
                         connectDvm();
-                        Serial.println("DVM zapojeny na 36V");
+                        Serial.println("DVM set for 36V");
                         digitalWrite(v36Pin, LOW);
                       }
                    else {                              
                         digitalWrite(v36Pin, LOW);
                         delay(500);                                                         
                         digitalWrite(v48Pin, HIGH);                       
-                        Serial.println("Nastavene 48V");                            
+                        Serial.println("Set for 48V");                            
                         readCurrent();                                                   
                         if (value > 8)  {                             
                             connectDvm();
-                            Serial.println("DVM zapojeny na 48V");
+                            Serial.println("DVM set for 48V");
                             digitalWrite(v48Pin, LOW);
                         }
                         else {                                       //error, if current was not detected under all voltages
